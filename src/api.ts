@@ -9,7 +9,7 @@ export class RealIndexer {
     return (body.data && !Array.isArray(body.data) ? body.data : body) as T;
   }
   async markets(): Promise<Market[]> {
-    const response = await this.get<ApiList<Market> | Market[]>("/api/v1/markets?limit=100");
+    const response = await this.get<ApiList<Market> | Market[]>("/api/v1/markets?p[s]=100");
     return Array.isArray(response) ? response : response.data;
   }
   depth(marketId: string): Promise<MarketDepth> {
