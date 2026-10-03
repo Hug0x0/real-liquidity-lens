@@ -1,4 +1,4 @@
-export type PriceLevel = { price: string; quantity?: string; volume?: string; size?: string };
+export type PriceLevel = { price_level?: string; price?: string; quantity?: string; volume?: string; size?: string };
 export type MarketDepth = { market_id: string; buys: PriceLevel[]; sells: PriceLevel[]; updated_at_ms: number };
 export type Market = { id: string; symbol: string; price: string };
 export type ApiList<T> = { data: T[] };
