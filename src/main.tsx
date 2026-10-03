@@ -15,9 +15,9 @@ function App() {
   useEffect(() => { api.markets().then((data) => { setMarkets(data); setMarketId(data[0]?.id || ""); }).catch(() => { setMarkets(demoMarkets); setMarketId("btc"); setDemo(true); }); }, [api]);
   useEffect(() => { if (!marketId) return; api.depth(marketId).then(setDepth).catch(() => setDepth(demoDepth(marketId, Number(markets.find((market) => market.id === marketId)?.price || 68120)))); }, [api, marketId, markets]);
   const levels = side === "buy" ? depth?.sells : depth?.buys; const estimate = levels ? estimateFill(levels, notional, side) : undefined;
-  return <main><header><div><span className="eyebrow">REAL EXECUTION INTELLIGENCE</span><h1>Liquidity<br/>Lens</h1></div><p>Inspect the book. Price the trade.<br/><b>{demo ? "Demo data" : "Live indexer"}</b></p></header>
+  return <><a className="skip-link" href="#main-content">Skip to content</a><main id="main-content"><header><div><span className="eyebrow">REAL EXECUTION INTELLIGENCE</span><h1>Liquidity<br/>Lens</h1></div><p>Inspect the book. Price the trade.<br/><b aria-live="polite">{demo ? "Demo data" : "Live indexer"}</b></p></header>
     <section className="panel controls"><label>Market<select value={marketId} onChange={(e) => setMarketId(e.target.value)}>{markets.map((market) => <option key={market.id} value={market.id}>{market.symbol}</option>)}</select></label><label>Direction<select value={side} onChange={(e) => setSide(e.target.value as Side)}><option value="buy">Buy</option><option value="sell">Sell</option></select></label><label>Order notional<input type="number" value={notional} min="0" step="100" onChange={(e) => setNotional(Number(e.target.value))}/></label></section>
     {depth && estimate && <><section className="metrics"><article><small>Spread</small><strong>{spreadBps(depth).toFixed(2)} bps</strong></article><article><small>Average fill</small><strong>{money.format(estimate.averagePrice)}</strong></article><article><small>Slippage</small><strong>{estimate.slippageBps.toFixed(2)} bps</strong></article><article><small>Fill</small><strong>{estimate.complete ? "100%" : `${(estimate.utilization * 100).toFixed(1)}%`}</strong></article></section><section className="panel"><DepthChart depth={depth}/></section></>}
-  </main>;
+  </main></>;
 }
 createRoot(document.getElementById("root")!).render(<React.StrictMode><App/></React.StrictMode>);
