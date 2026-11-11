@@ -18,6 +18,8 @@ A lightweight, read-only dashboard for exploring REAL perpetual order books and 
 
 ---
 
+![Liquidity Lens estimating a $100,000 BTC-USDT buy against the live REAL order book](assets/liquidity-lens.png)
+
 ## Overview
 
 The best quoted price only tells part of the story. Larger orders may consume liquidity across several price levels, changing the average execution price.
