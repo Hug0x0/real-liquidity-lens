@@ -85,4 +85,4 @@ Fees, funding, latency, hidden liquidity, and subsequent order additions, cancel
 
 The current implementation does not explicitly represent unavailable metrics. Empty or one-sided books can produce zeros or misleading spread values. A zero-notional request is marked complete but has zero average price; slippage is not meaningful for such a request. Invalid or non-finite prices and quantities are not filtered. Use positive notionals and valid, two-sided books for meaningful results.
 
-Depth-fetch failures generate synthetic data without necessarily changing the “Live indexer” label. See [Architecture](ARCHITECTURE.md) for the fallback behavior.
+Depth-fetch failures generate synthetic data and switch the header to “Demo data.” See [Architecture](ARCHITECTURE.md) for the fallback behavior.

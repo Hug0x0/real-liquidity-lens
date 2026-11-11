@@ -49,16 +49,14 @@ TypeScript types do not validate incoming JSON. The client checks HTTP success b
 
 On mount, the application requests markets and selects the first returned entry. It requests depth when the selected market or market-list state changes. Changing direction or notional recalculates the estimate locally without requesting a fresh snapshot.
 
-There is no polling, streaming, request cancellation, or protection against responses arriving out of order. The API timestamp is not displayed. An empty market list leaves no market selected and no metrics rendered.
+While a market is selected, depth is re-requested every 15 seconds. Switching markets cancels the previous polling loop and ignores its late responses. The header displays the local time of the last snapshot (not the API `updated_at_ms`). There is no streaming. An empty market list leaves no market selected and no metrics rendered.
 
 ## Fallback behavior
 
 - If market discovery fails, the app selects synthetic BTC-USDT, ETH-USDT, HYPE-USDT, SOL-USDT, XRP-USDT, and XAUT-USDT markets and sets the header to “Demo data.”
 - A depth request is still attempted for the selected market.
 - If a depth request fails, the app generates twelve synthetic levels per side around the selected market's price, using $68,120 when that price is unavailable or falsy.
-- A depth failure does not update the demo flag. Synthetic depth can therefore appear under “Live indexer.”
-
-The flag describes the market-discovery fallback state, not independently verified provenance of every displayed depth snapshot. Correcting this is a useful follow-up before relying on the dashboard for live analysis.
+- A depth failure marks the displayed book as synthetic. The header shows “Live indexer” only when market discovery and the latest depth request both succeeded.
 
 ## Rendering and build
 

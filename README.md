@@ -38,7 +38,7 @@ Liquidity Lens lets you select a market, choose **Buy** or **Sell**, and enter a
 
 ## Quick start
 
-Use **Node.js 22** (the version used by CI) and npm.
+Use **Node.js 24** (pinned in `.nvmrc` and used by CI) and npm.
 
 ```bash
 git clone https://github.com/Hug0x0/real-liquidity-lens.git
@@ -90,12 +90,12 @@ The estimate uses all returned levels, even though the visual book shows only th
 
 This is an early prototype. Treat estimates as a view of displayed liquidity, not a promise of execution.
 
-- **Snapshots, not streaming:** depth is fetched when the selected market changes; there is no polling, WebSocket subscription, or manual refresh control.
-- **Fallback labeling:** failed requests use synthetic data. If only the depth request fails, the header can still say “Live indexer.” The status label is not a reliable guarantee that the displayed book is live.
+- **Polling, not streaming:** the selected market's depth is refreshed every 15 seconds; there is no WebSocket subscription. The header shows the time of the last snapshot.
+- **Fallback labeling:** failed requests use synthetic data. The header shows “Live indexer” only when both market discovery and the latest depth request succeeded; otherwise it shows “Demo data.”
 - **Incomplete execution costs:** estimates exclude fees, funding, latency, and changes to the book before execution.
 - **API assumptions:** levels are consumed in their returned order, with no sorting or runtime schema validation. The estimator expects valid, positive prices and nonnegative base-asset quantities.
 - **Market coverage:** market discovery makes one request with a page size of 100; additional pages are not fetched.
-- **Display conventions:** average prices are formatted as USD with two decimal places. Currency formatting is not derived from market metadata.
+- **Display conventions:** prices and sizes use the market's `order_rules` decimal places and `quote_unit`, falling back to two price decimals, three size decimals, and USD when metadata is absent.
 
 ## Documentation
 
