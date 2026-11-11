@@ -2,7 +2,7 @@
 
 ## Local setup
 
-Use Node.js 22 and npm. From the repository root:
+Use Node.js 24 (pinned in `.nvmrc`) and npm. From the repository root:
 
 ```bash
 npm ci
@@ -26,7 +26,7 @@ npm run build
 
 The existing Vitest suite checks walking multiple price levels, insufficient liquidity, and top-of-book spread. It does not currently cover browser interactions or integration with the external indexer. The build type-checks application source; test files are excluded from that TypeScript configuration.
 
-GitHub Actions runs `npm ci`, `npm test`, and `npm run build` on pushes and pull requests using Node.js 22. There is no dedicated lint script.
+GitHub Actions runs `npm ci`, `npm test`, and `npm run build` on pushes and pull requests using the Node.js version from `.nvmrc`. There is no dedicated lint script.
 
 For a manual check, open the app, select a market, switch between Buy and Sell, and vary the notional. Check the metrics and both sides of the book at desktop and narrow viewport widths. Use the browser network panel to confirm whether the indexer requests succeeded; the current live/demo label alone is insufficient.
 
@@ -48,8 +48,7 @@ The repository does not currently configure automatic deployment or a public dem
 | Vite uses a different port | Another process occupies the default port; use the printed URL |
 | “Demo data” appears | The market-list request failed; check connectivity, HTTP status, and CORS |
 | Book appears despite a failed depth request | The app generated synthetic fallback levels |
-| “Live indexer” appears with synthetic depth | Known limitation: depth failures do not update the demo flag |
-| Metrics do not update over time | No automatic refresh exists; reload to request fresh data |
+| Metrics stop updating | Depth refreshes every 15 seconds; check the browser console for failed requests |
 | Market selector is empty | An empty successful market response does not trigger demo fallback |
 | Unexpected prices or quantities | Confirm schema, units, valid numeric fields, and best-first level ordering |
 
