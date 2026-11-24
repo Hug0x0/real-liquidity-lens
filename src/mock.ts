@@ -8,6 +8,12 @@ export const demoMarkets: Market[] = [
   { id: "sol", symbol: "SOL-USDT", price: "100", quote_unit: "USDT", order_rules: { price_decimal_places: "3", size_decimal_places: "2" } },
   { id: "xrp", symbol: "XRP-USDT", price: "1.25", quote_unit: "USDT", order_rules: { price_decimal_places: "5", size_decimal_places: "0" } },
   { id: "xaut", symbol: "XAUT-USDT", price: "3900", quote_unit: "USDT", order_rules: { price_decimal_places: "2", size_decimal_places: "3" } },
+  { id: "bnb", symbol: "BNB-USDT", price: "551", quote_unit: "USDT", order_rules: { price_decimal_places: "2", size_decimal_places: "3" } },
+  { id: "zec", symbol: "ZEC-USDT", price: "755", quote_unit: "USDT", order_rules: { price_decimal_places: "2", size_decimal_places: "3" } },
+  { id: "xmr", symbol: "XMR-USDT", price: "498", quote_unit: "USDT", order_rules: { price_decimal_places: "3", size_decimal_places: "4" } },
+  { id: "lit", symbol: "LIT-USDT", price: "2.42", quote_unit: "USDT", order_rules: { price_decimal_places: "5", size_decimal_places: "2" } },
+  { id: "near", symbol: "NEAR-USDT", price: "3.01", quote_unit: "USDT", order_rules: { price_decimal_places: "5", size_decimal_places: "2" } },
+  { id: "ena", symbol: "ENA-USDT", price: "0.1006", quote_unit: "USDT", order_rules: { price_decimal_places: "7", size_decimal_places: "1" } },
 ];
 const levels = (start: number, direction: number, priceDecimals: number, sizeDecimals: number) => Array.from({ length: 12 }, (_, index) => ({ price: (start + direction * index * start * .00025).toFixed(priceDecimals), quantity: Math.max(10 ** -sizeDecimals, 0.3 + index * .11).toFixed(sizeDecimals) }));
 export const demoDepth = (marketId: string, price = 68120, priceDecimals = 2, sizeDecimals = 3): MarketDepth => ({ market_id: marketId, buys: levels(price * .9999, -1, priceDecimals, sizeDecimals), sells: levels(price * 1.0001, 1, priceDecimals, sizeDecimals), updated_at_ms: Date.now() });

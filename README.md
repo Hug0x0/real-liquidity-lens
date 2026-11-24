@@ -36,7 +36,7 @@ Liquidity Lens lets you select a market, choose **Buy** or **Sell**, and enter a
 | Average fill | The quantity-weighted average price of a simulated execution |
 | Slippage | The difference between the simulated average price and the best available price on the execution side |
 | Fill coverage | The percentage of the requested notional covered by returned liquidity |
-| Demo fallback | Synthetic depth when a request fails; BTC-USDT, ETH-USDT, HYPE-USDT, SOL-USDT, XRP-USDT, and XAUT-USDT when market discovery fails |
+| Demo fallback | Synthetic depth when a request fails; BTC-USDT, ETH-USDT, SOL-USDT, HYPE-USDT, XRP-USDT, XAUT-USDT, BNB-USDT, ZEC-USDT, LIT-USDT, NEAR-USDT, XMR-USDT and ENA-USDT when market discovery fails |
 
 ## Quick start
 

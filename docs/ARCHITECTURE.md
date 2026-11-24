@@ -22,7 +22,7 @@ Browser
 | `src/slippage.ts` | Price extraction, execution simulation, and spread calculation |
 | `src/DepthChart.tsx` | The first ten levels per side with relative quantity bars |
 | `src/types.ts` | Compile-time market, depth, and estimate types |
-| `src/mock.ts` | BTC/ETH/HYPE/SOL/XRP/XAUT demo markets and synthetic depth generation |
+| `src/mock.ts` | BTC/ETH/HYPE/SOL/XRP/XAUT/BNB/ZEC/XMR/LIT/NEAR/ENA demo markets and synthetic depth generation |
 | `src/styles.css` | Layout, responsive styles, focus states, and skip-link styling |
 | `src/slippage.test.ts` | Unit tests for the estimator and spread |
 | `index.html` | HTML shell, metadata, and Google Fonts requests |
@@ -53,7 +53,7 @@ While a market is selected, depth is re-requested every 15 seconds. Switching ma
 
 ## Fallback behavior
 
-- If market discovery fails, the app selects synthetic BTC-USDT, ETH-USDT, HYPE-USDT, SOL-USDT, XRP-USDT, and XAUT-USDT markets and sets the header to “Demo data.”
+- If market discovery fails, the app selects synthetic BTC-USDT, ETH-USDT, SOL-USDT, HYPE-USDT, XRP-USDT, XAUT-USDT, BNB-USDT, ZEC-USDT, LIT-USDT, NEAR-USDT, XMR-USDT and ENA-USDT markets and sets the header to “Demo data.”
 - A depth request is still attempted for the selected market.
 - If a depth request fails, the app generates twelve synthetic levels per side around the selected market's price, using $68,120 when that price is unavailable or falsy.
 - A depth failure marks the displayed book as synthetic. The header shows “Live indexer” only when market discovery and the latest depth request both succeeded.
